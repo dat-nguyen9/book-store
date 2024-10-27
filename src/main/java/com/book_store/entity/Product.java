@@ -56,8 +56,8 @@ public class Product implements Serializable {
     private Set<ProductImage> productImages;
     @OneToMany(mappedBy="product")
     private Set<Cart> carts;
-    @OneToMany(mappedBy="order")
-    private Set<OrderDetail> orderDetails;
+//    @OneToMany(mappedBy="order")
+//    private Set<OrderDetail> orderDetails;
 
 
 }

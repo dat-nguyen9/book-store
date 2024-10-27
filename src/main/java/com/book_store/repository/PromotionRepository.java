@@ -1,8 +1,9 @@
 package com.book_store.repository;
 
+import com.book_store.entity.Promotion;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PromotionRepository extends JpaRepository {
+public interface PromotionRepository extends JpaRepository<Promotion, Integer> {
 }

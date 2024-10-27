@@ -1,8 +1,9 @@
 package com.book_store.repository;
 
+import com.book_store.entity.Feedback;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FeedbackRepository extends JpaRepository {
+public interface FeedbackRepository extends JpaRepository<Feedback, Integer> {
 }
