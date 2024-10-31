@@ -66,7 +66,6 @@ public class ProductController {
         model.addAttribute("query", "?sortField=" + sortField + "&sortDir="
                 + sortDir + "&keyword=" + keyword + "&categoryId=" + categoryId);
         model.addAttribute("categoryList", productService.getCategoryList());
-//        model.addAttribute("size_carts", cartService.getCartSize());
         return "products";
     }
 }
