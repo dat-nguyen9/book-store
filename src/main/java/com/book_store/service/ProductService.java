@@ -2,6 +2,7 @@ package com.book_store.service;
 
 import com.book_store.entity.Category;
 import com.book_store.entity.Product;
+import com.book_store.entity.ProductImage;
 import com.book_store.repository.CategoryRepository;
 import com.book_store.repository.ProductImageRepository;
 import com.book_store.repository.ProductRepository;
@@ -38,5 +39,45 @@ public class ProductService {
 
     public List<Category> getCategoryList() {
         return categoryRepository.findAll();
+    }
+
+    // product_detail
+    public Product getProduct(int id) {
+        return productRepository.getById(id);
+    }
+
+    public List<ProductImage> findImageProductById(int id) {
+        return productImageRepository.findAllByProductId(id);
+    }
+
+    public void saveProduct(Product product) {
+        productRepository.save(product);
+    }
+
+    public ProductImage findImageById(int id) {
+        return productImageRepository.findById(id);
+    }
+
+    public void deleteImageProduct(int id) {
+        productImageRepository.deleteById(id);
+    }
+
+    public void saveImageProduct(ProductImage productImage) {
+        productImageRepository.save(productImage);
+    }
+
+    public Page<Product> listAllProduct(int currentPage, String sortField, String sortDirection, String keyword) {
+        Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
+                Sort.by(sortField).descending();
+        Pageable pageable = PageRequest.of(currentPage - 1, 6, sort);
+        return productRepository.findByNameContaining(keyword, pageable);
+    }
+
+    public List<Product>getAllProducts(){
+        return productRepository.findAll();
+    }
+
+    public void saveAllProduct(List<Product> productList){
+        productRepository.saveAll(productList);
     }
 }
