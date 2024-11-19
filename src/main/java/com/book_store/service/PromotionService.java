@@ -37,4 +37,8 @@ public class PromotionService {
     public Promotion findByName(String name) {
         return promotionRepository.findByName(name);
     }
+
+    public Promotion getPromotionByCode(String promotionCode){
+        return promotionRepository.findByCode(promotionCode);
+    }
 }

@@ -29,4 +29,6 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
     @Query(value = "SELECT * FROM Orders where Month(created_at) = ?1 and Year(created_at) = ?2", nativeQuery = true)
     public Page<Order> findByMonthAndYear(int month, int year, Pageable pageable);
 
+    List<Order> findAllByCustomerId(Integer customerId);
+
 }

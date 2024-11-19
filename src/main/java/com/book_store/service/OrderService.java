@@ -74,4 +74,12 @@ public class OrderService {
         Pageable pageable = PageRequest.of(currentPage - 1, 6);
         return orderRepository.findByMonthAndYear(month, year, pageable);
     }
+
+    public List<Order> getAllUserOrder(int customerId) {
+        return orderRepository.findAllByCustomerId(customerId);
+    }
+
+    public Order findOrderbyOrderId(int orderId) {
+        return orderRepository.getById(orderId);
+    }
 }

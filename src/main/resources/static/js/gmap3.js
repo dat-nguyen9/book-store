@@ -36,13 +36,6 @@ function initDefaults() {
         delay: 250, // setTimeout(..., delay + random);
         random: 250
       },
-      classes: (function () {
-        var r = {};
-        $.each("Map Marker InfoWindow Circle Rectangle OverlayView StreetViewPanorama KmlLayer TrafficLayer TransitLayer BicyclingLayer GroundOverlay StyledMapType ImageMapType".split(" "), function (_, k) {
-          r[k] = gm[k];
-        });
-        return r;
-      }()),
       map: {
         mapTypeId : gm.MapTypeId.ROADMAP,
         center: [46.578498, 2.457275],
@@ -1032,36 +1025,6 @@ function InternalClusterer($container, map, raw) {
     }
   };
 
-  // add a "marker td" to the cluster
-  self.add = function (td, value) {
-    td.id = globalId(td.id);
-    self.clearById(td.id);
-    ids[td.id] = markers.length;
-    idxs[markers.length] = td.id;
-    markers.push(null); // null = marker not yet created / displayed
-    tds.push(td);
-    values.push(value);
-    updated = true;
-  };
-
-  // add a real marker to the cluster
-  self.addMarker = function (marker, td) {
-    td = td || {};
-    td.id = globalId(td.id);
-    self.clearById(td.id);
-    if (!td.options) {
-      td.options = {};
-    }
-    td.options.position = marker.getPosition();
-    attachEvents($container, {td: td}, marker, td.id);
-    ids[td.id] = markers.length;
-    idxs[markers.length] = td.id;
-    markers.push(marker);
-    tds.push(td);
-    values.push(td.data || {});
-    updated = true;
-  };
-
   // return a "marker td" by its index
   self.td = function (index) {
     return tds[index];
@@ -1084,11 +1047,6 @@ function InternalClusterer($container, map, raw) {
   // return a marker by its index
   self.markerIsSet = function (index) {
     return Boolean(markers[index]);
-  };
-
-  // store a new marker instead if the default "false"
-  self.setMarker = function (index, marker) {
-    markers[index] = marker;
   };
 
   // link the visible overlay to the logical data (to hide overlays later)

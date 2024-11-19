@@ -1628,56 +1628,6 @@ GMaps.staticMapURL = function(options){
     }
   }
 
-  /** Markers **/
-  if (markers) {
-    var marker, loc;
-
-    for (var i=0; data=markers[i]; i++) {
-      marker = [];
-
-      if (data.size && data.size !== 'normal') {
-        marker.push('size:' + data.size);
-        delete data.size;
-      }
-      else if (data.icon) {
-        marker.push('icon:' + encodeURI(data.icon));
-        delete data.icon;
-      }
-
-      if (data.color) {
-        marker.push('color:' + data.color.replace('#', '0x'));
-        delete data.color;
-      }
-
-      if (data.label) {
-        marker.push('label:' + data.label[0].toUpperCase());
-        delete data.label;
-      }
-
-      loc = (data.address ? data.address : data.lat + ',' + data.lng);
-      delete data.address;
-      delete data.lat;
-      delete data.lng;
-
-      for(var param in data){
-        if (data.hasOwnProperty(param)) {
-          marker.push(param + ':' + data[param]);
-        }
-      }
-
-      if (marker.length || i === 0) {
-        marker.push(loc);
-        marker = marker.join('|');
-        parameters.push('markers=' + encodeURI(marker));
-      }
-      // New marker without styles
-      else {
-        marker = parameters.pop() + encodeURI('|' + loc);
-        parameters.push(marker);
-      }
-    }
-  }
-
   /** Map Styles **/
   if (styles) {
     for (var i = 0; i < styles.length; i++) {

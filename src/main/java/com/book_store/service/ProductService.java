@@ -30,7 +30,7 @@ public class ProductService {
                                  String sortDirection, String keyword, int categoryId) {
         Sort sort = sortDirection.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortField).ascending() :
                 Sort.by(sortField).descending();
-        Pageable pageable = PageRequest.of(currentPage - 1, 6, sort);
+        Pageable pageable = PageRequest.of(currentPage - 1, 12, sort);
         if (categoryId == -1) {
             return productRepository.searchProductByName(keyword, pageable);
         }
